@@ -51,6 +51,5 @@ Bu proje, kurumsal mimari desenlerin doğru senaryolarda uygulandığı, bakım�
 **Teşekkürler:** Rehberlikleri için Murat Yücedağ ve Erhan Gündüz hocalarıma teşekkür ederim.
 
 ---
-🔗 **Proje Linki:** [GitHub Repo](https://lnkd.in/d_XiHNbD)
 
 `#dotnetcore` `#csharp` `#aspnetmvc` `#cqrs` `#mediatr` `#unitofwork` `#observerpattern` `#googlecloud` `#ecommerce`
