@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>eb562483-6ae6-4277-a038-642a4cd32765</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="4.14.0" />
+    <PackageReference Include="MailKit" Version="4.14.1" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.12" />
+    <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\User\Data\" />
+    <Folder Include="Areas\User\Models\" />
+  </ItemGroup>
+
+</Project>

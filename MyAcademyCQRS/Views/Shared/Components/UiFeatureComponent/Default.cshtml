@@ -1,0 +1,33 @@
+﻿@model List<GetFeaturesQueryResult>
+
+@*
+    Ui Feature Component
+*@
+
+@{
+    int count = 0;
+}
+
+<section class="feature-section">
+    <div class="auto-container">
+        <div class="row clearfix">
+            @foreach(var item in Model)
+            {
+                count++;
+                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                    <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="count-box" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery/assets/images/icons/icon-bg-2.png');">
+                                <h4>@count</h4>
+                            </div>
+                            <div class="inner">
+                                <h4>@item.Title</h4>
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

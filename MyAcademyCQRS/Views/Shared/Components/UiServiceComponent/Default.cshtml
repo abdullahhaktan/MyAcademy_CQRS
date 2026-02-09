@@ -1,0 +1,38 @@
+﻿@model List<GetServicesQueryResult>
+
+@*
+    Ui Service Component
+*@
+
+<section class="service-section sec-pad centred" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/service-1.jpg');">
+    <div class="auto-container">
+        <div class="sec-title">
+            <p>Hizmetler</p>
+            <h2>Kalite ve Tutku ile <br />Hizmetlerimiz!</h2>
+        </div>
+        <div class="row clearfix">
+            @{
+                int count = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one">
+                        <div class="inner-box">
+                            <div class="icon-box wow fadeInDown animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                <div class="bg-layer" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-3.png');"></div>
+                                <i class="@item.IconClass"> </i>
+                            </div>
+                            <div class="lower-content wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                <h3><a href="service.html">@item.Title</a></h3>
+                                <p>@item.Description</p>
+                                <div class="btn-box"><a href="service.html">Daha Fazlasını Oku</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                count++;
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,37 @@
+﻿@model List<GetBannersQueryResult>
+
+@*
+    Ui Banner Component
+*@
+
+<section class="banner-section style-one">
+    <div class="banner-carousel owl-theme owl-carousel owl-dots-none nav-style-one">
+        @foreach (var banner in Model)
+        {
+            <div class="slide-item">
+                <div class="image-layer" style="background-image:url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/banner/banner-1.jpg')"></div>
+                <div class="anim-icon">
+                    <div class="icon icon-1" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/anim-icon-1.png');"></div>
+                    <div class="icon icon-2" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/anim-icon-2.png');"></div>
+                    <div class="icon icon-3" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/anim-icon-3.png');"></div>
+                    <div class="icon icon-4" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/shape/shape-1.png');"></div>
+                    <div class="icon icon-5" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/shape/shape-2.png');"></div>
+                </div>
+                <div class="auto-container">
+                    <div class="content-inner">
+                        <div class="content-box">
+                            <h1>@banner.Title</h1>
+                            <p>@banner.Description</p>
+                            <div class="btn-box">
+                                <a href="index.html" class="banner-btn">Explore Now</a>
+                            </div>
+                        </div>
+                        <figure class="image-box style-one">
+                            <img src="@banner.ImageUrl" alt="">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

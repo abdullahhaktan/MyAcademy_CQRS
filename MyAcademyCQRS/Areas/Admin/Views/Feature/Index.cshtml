@@ -1,0 +1,49 @@
+﻿@model List<GetFeaturesQueryResult>
+@{
+    ViewBag.Title = "Özellikler";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 p-8 space-y-6 font-display">
+
+    <div class="flex justify-between items-center">
+        <div>
+            <h2 class="text-3xl font-black">Özellikler</h2>
+            <p class="text-gray-500">Sistemde tanımlı özellikler</p>
+        </div>
+
+        <a href="/Admin/Feature/CreateFeature"
+           class="bg-primary text-white px-5 py-2.5 rounded-lg font-bold no-underline">
+            Yeni Özellik
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        @foreach (var item in Model)
+        {
+            <div class="bg-white rounded-xl border shadow p-5 space-y-3 group">
+
+                <h4 class="text-lg font-bold">@item.Title</h4>
+
+                <p class="text-gray-600 text-sm line-clamp-3">
+                    @item.Description
+                </p>
+
+                <div class="flex justify-end gap-3 pt-3 opacity-0 group-hover:opacity-100 transition">
+                    <a href="/Admin/Feature/UpdateFeature/@item.Id"
+                       class="text-primary font-semibold">
+                        Düzenle
+                    </a>
+
+                    <a href="/Admin/Feature/DeleteFeature/@item.Id"
+                       onclick="return confirm('Silmek istiyor musunuz?')"
+                       class="text-red-600 font-semibold">
+                        Sil
+                    </a>
+                </div>
+
+            </div>
+        }
+    </div>
+
+</div>

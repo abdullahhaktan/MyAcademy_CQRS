@@ -1,0 +1,192 @@
+﻿@model GetOrderByIdQueryResult
+
+@{
+    ViewBag.Title = "Sipariş Güncelle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 p-8 space-y-8 font-display max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Sipariş Güncelle</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">#@Model.Id - @Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full text-xs font-bold @(Model.Status.ToLower() == "completed" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : Model.Status.ToLower() == "pending" ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400")">
+                @if(Model.Status.ToLower() == "pending")
+                {
+                    <h6>Beklemede</h6>
+                }
+                @if (Model.Status.ToLower() == "completed")
+                {
+                    <h6>Tamamlandı</h6>
+                }
+                @if (Model.Status.ToLower() == "cancelled")
+                {
+                    <h6>İptal Edildi</h6>
+                }
+            </span>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <form method="post" class="space-y-8">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="UserId" />
+
+        <!-- Sipariş Bilgileri Kartı -->
+        <div class="bg-white dark:bg-[#151b2b] rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">Sipariş Bilgileri</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Kullanıcı -->
+                <div>
+                    <label class="block text-sm font-bold mb-3 text-gray-700 dark:text-gray-300">Kullanıcı</label>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800/40 rounded-xl border">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-white">@Model.User?.UserName</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Müşteri</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarih -->
+                <div>
+                    <label class="block text-sm font-bold mb-3 text-gray-700 dark:text-gray-300">Sipariş Tarihi</label>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800/40 rounded-xl border">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-white">@Model.CreatedDate.ToString("dd.MM.yyyy")</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">@Model.CreatedDate.ToString("HH:mm")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Durum -->
+                <div>
+                    <label class="block text-sm font-bold mb-3 text-gray-700 dark:text-gray-300">Sipariş Durumu</label>
+                    <select name="Status"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800/40 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all">
+                        <option value="Pending" selected="@(Model.Status.ToLower() == "pending")">Beklemede</option>
+                        <option value="Completed" selected="@(Model.Status.ToLower() == "completed")">Tamamlandı</option>
+                        <option value="Cancelled" selected="@(Model.Status.ToLower() == "cancelled")">İptal Edildi</option>
+                        <option value="Shipped" selected="@(Model.Status.ToLower() == "shipped")">Kargoya Verildi</option>
+                    </select>
+                </div>
+
+                <!-- Toplam -->
+                <div>
+                    <label class="block text-sm font-bold mb-3 text-gray-700 dark:text-gray-300">Toplam Tutar (₺)</label>
+                    <input type="text"
+                           name="TotalPrice"
+                           value="@Model.TotalPrice"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800/40 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Sipariş Ürünleri Kartı -->
+        <div class="bg-white dark:bg-[#151b2b] rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div class="p-8 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white">Sipariş Ürünleri</h3>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        @Model.OrderItems.Count() ürün
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-800/40">
+                        <tr>
+                            <th class="p-5 text-left font-bold text-gray-700 dark:text-gray-300">Ürün</th>
+                            <th class="p-5 text-center font-bold text-gray-700 dark:text-gray-300">Adet</th>
+                            <th class="p-5 text-right font-bold text-gray-700 dark:text-gray-300">Birim Fiyat</th>
+                            <th class="p-5 text-right font-bold text-gray-700 dark:text-gray-300">Toplam</th>
+                            <th class="p-5 text-right font-bold text-gray-700 dark:text-gray-300">İşlem</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            <tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/20 transition-colors">
+                                <td class="p-5">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center">
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800 dark:text-white">@item.Product.Title</p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">SKU: @item.Product.Id</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-5">
+                                    <div class="flex justify-center">
+                                        <span class="inline-flex items-center justify-center min-w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg font-bold text-gray-800 dark:text-white">
+                                            @item.Quantity
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="p-5 text-right font-mono font-medium text-gray-800 dark:text-white">@item.UnitPrice ₺</td>
+                                <td class="p-5 text-right">
+                                    <span class="font-bold text-gray-900 dark:text-white font-mono">
+                                        @(item.Quantity* item.UnitPrice) ₺
+                                    </span>
+                                </td>
+                                <td class="p-5">
+                                    <div class="flex justify-end gap-2">
+                                        <a href="/Admin/Order/UpdateOrderItem/@item.Id"
+                                           class="px-4 py-2 rounded-lg border border-yellow-500 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition-colors flex items-center gap-2"
+                                           title="Güncelle">
+                                            Güncelle
+                                        </a>
+                                        <a href="/Admin/Order/DeleteOrderItem/@item.Id"
+                                           onclick="return confirm('Bu ürünü siparişten çıkarmak istediğinize emin misiniz?')"
+                                           class="px-4 py-2 rounded-lg border border-red-500 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-2"
+                                           title="Sil">
+                                            Sil
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                    <!-- Toplam Satır -->
+                    <tfoot class="bg-gray-50 dark:bg-gray-800/40">
+                        <tr>
+                            <td colspan="3" class="p-5 text-right font-bold text-gray-700 dark:text-gray-300">Genel Toplam:</td>
+                            <td class="p-5 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <span class="text-2xl font-black text-primary dark:text-primary-light">
+                                        @Model.TotalPrice ₺
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="p-5"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-end gap-4 pt-4">
+            <a href="/Admin/Order/Index"
+               class="px-6 py-3 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center gap-2 font-medium">
+                Vazgeç
+            </a>
+            <button type="submit"
+                    class="px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-sm">
+                Güncelle
+            </button>
+        </div>
+    </form>
+</div>

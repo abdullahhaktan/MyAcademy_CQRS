@@ -1,0 +1,97 @@
+﻿@model CreateContactCommand
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("UiHeadComponent")
+
+<body>
+
+    <div class="boxed_wrapper">
+
+        @await Component.InvokeAsync("UiPreloadComponent")
+
+        @await Component.InvokeAsync("UiSidebarAndSocialMediaComponent")
+
+        @await Component.InvokeAsync("UiSidebarComponent")
+
+        @await Component.InvokeAsync("UiMobileMenuComponent")
+
+        <section class="contact-section sec-pad" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/contact-1.jpg');">
+            <div class="auto-container">
+                <div class="sec-title centred">
+                    <p>Bize Ulaşın</p>
+                    <h2>İletişime Geçin</h2>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 info-column">
+                        <div class="contact-info-inner">
+                            <div class="single-box">
+                                <h3>Çalışma Saatleri</h3>
+                                <ul class="list clearfix">
+                                    <li>Her Gün: 09.30 – 18.00</li>
+                                    <li>Pazar & Resmi Tatiller: Kapalı</li>
+                                </ul>
+                            </div>
+                            <div class="single-box">
+                                <h3>İletişim Bilgileri</h3>
+                                <ul class="list clearfix">
+                                    <li>77408 Satterfield Motorway Suite 469 New Antonetta, BC K3L6P6</li>
+                                    <li><a href="mailto:example@gmail.com">example@gmail.com</a></li>
+                                    <li><a href="tel:6174959400326">(617) 495-9400-326</a></li>
+                                </ul>
+                            </div>
+                            <div class="single-box">
+                                <h3>Sosyal Medya</h3>
+                                <ul class="social-links clearfix">
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="index.html"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="index.html"><i class="fab fa-vimeo-v"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/abdullah-haktan-6186161b7/"><i class="fab fa-linkedin-in"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-12 form-column">
+                        <div class="form-inner">
+                            <h3>Bize Mesaj Gönderin</h3>
+                            <form method="post" action="/Contact/Index" id="contact-form" class="default-form">
+                                <div class="row clearfix">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input type="text" asp-for="FullName" placeholder="Adınız Soyadınız *" required="">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input type="email" asp-for="Email" placeholder="E-posta Adresiniz *" required="">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                        <input type="text" asp-for="Phone" required="" placeholder="Telefon Numaranız">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                        <input type="text" asp-for="Subject" required="" placeholder="Konu">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                        <textarea asp-for="Message" placeholder="Mesajınız ..."></textarea>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
+                                        <button class="theme-btn-one" type="submit" name="submit-form">Gönder</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @await Component.InvokeAsync("UiFooterComponent")
+
+    </div>
+
+    @await Component.InvokeAsync("UiScriptComponent")
+
+</body>
+</html>

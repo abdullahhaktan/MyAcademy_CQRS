@@ -1,0 +1,51 @@
+﻿@model List<GetBlogsQueryResult>
+
+@{
+    ViewData["Title"] = "Bloglar";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="p-8">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">📝 Blog Yazıları</h2>
+        <a href="/Admin/Blog/CreateBlog"
+           class="bg-primary text-white px-5 py-2 rounded-lg hover:bg-primary/90 transition">
+            + Yeni Blog
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        @foreach (var blog in Model)
+        {
+            <div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-5 flex flex-col">
+
+                <h3 class="font-semibold text-lg mb-2 line-clamp-2">
+                    @blog.Title
+                </h3>
+
+                <p class="text-sm text-slate-500 flex-1 line-clamp-3">
+                    @blog.Description
+                </p>
+
+                <div class="mt-4 flex justify-between items-center text-sm">
+                    <span class="text-slate-400">
+                        🕒 @blog.CreatedDate.ToString("dd.MM.yyyy")
+                    </span>
+
+                    <div class="flex gap-2">
+                        <a href="/Admin/Blog/UpdateBlog/@blog.Id"
+                           class="px-3 py-1 rounded-md bg-blue-500/10 text-blue-600 hover:bg-blue-500/20">
+                            Düzenle
+                        </a>
+                        <a href="/Admin/Blog/DeleteBlog/@blog.Id"
+                           onclick="return confirm('Silmek istediğine emin misin?')"
+                           class="px-3 py-1 rounded-md bg-red-500/10 text-red-600 hover:bg-red-500/20">
+                            Sil
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>

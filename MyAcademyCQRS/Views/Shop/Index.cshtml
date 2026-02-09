@@ -1,0 +1,207 @@
+﻿@using PagedList.Core
+@using PagedList.Core.Mvc
+@model PagedList<GetProductsQueryResult>
+
+@{
+    Layout = null;
+    var customOptions = PagedListRenderOptions.Bootstrap4PageNumbersPlusPrevAndNext;
+    customOptions.LinkToPreviousPageFormat = "<--";
+    customOptions.LinkToNextPageFormat = "-->";
+}
+
+<style>
+    .shop-block-one .image-box {
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+        .shop-block-one .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+    .shop-block-one:hover .image-box img {
+        transform: scale(1.07);
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+@await Component.InvokeAsync("UiHeadComponent")
+<body>
+    <div class="boxed_wrapper">
+        @await Component.InvokeAsync("UiPreloadComponent")
+        @await Component.InvokeAsync("UiSidebarAndSocialMediaComponent")
+        @await Component.InvokeAsync("UiSidebarComponent")
+        @await Component.InvokeAsync("UiMobileMenuComponent")
+
+        <section class="page-title centred" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/page-title.jpg');">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="title"><h1>Menü Sayfası</h1></div>
+                    <ul class="bread-crumb clearfix"><li>Menü</li></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-page-section shop-page-1">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-12 col-sm-12 sidebar-side">
+                        <div class="shop-sidebar default-sidebar">
+                            <div class="sidebar-widget sidebar-search">
+                                <form action="/Shop/Index" method="post" class="search-form">
+                                    <div class="form-group">
+                                        <input type="search" name="searchField" placeholder="Ara..." required="">
+                                        <button type="submit"><i class="icon-Search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="sidebar-widget sidebar-categories">
+                                <div class="widget-title"><h3>Kategorilere göre ürünler</h3></div>
+                                <div class="widget-content">
+                                    <ul class="categories-list clearfix">
+                                        @foreach (var item in ViewBag.categories)
+                                        {
+                                            <li><a href="/Shop/Index/@item.Id">@item.Name</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sidebar-widget price-filter">
+                                <div class="widget-title">
+                                    <h3>Fiyat Bazlı Filtreleme</h3>
+                                </div>
+                                <div class="range-slider clearfix">
+                                    <div class="price-range-slider"></div>
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <a href="#" id="price-filter-submit" class="filter-btn">Filtrele</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p>Ücret:</p>
+                                            <div class="input"><input type="text" class="property-amount" name="field-name" readonly=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sidebar-widget post-widget">
+                                <div class="widget-title"><h3>Son Eklenen 3 Ürün</h3></div>
+                                <div class="post-inner">
+                                    @if (ViewBag.lastAddedThreeProducts != null)
+                                    {
+                                        foreach (var item in ViewBag.lastAddedThreeProducts)
+                                        {
+                                            <div class="post">
+                                                <figure class="image-box"><a href="/Shop/ShopDetail/@item.Id"><img src="@item.ImageUrl" alt=""></a></figure>
+                                                <h5><a href="/Shop/ShopDetail/@item.Id">@item.Title</a></h5>
+                                                <p>₺@item.Price</p>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-12 col-sm-12 content-side">
+                        <div class="our-shop">
+                            <div class="item-shorting clearfix">
+                                <div class="left-column pull-left clearfix">
+                                    <div class="text"><p>@ViewBag.totalProducts kayıttan @ViewBag.totalPageProducts kadarı gösteriliyor</p></div>
+                                </div>
+                                <div class="right-column pull-right clearfix">
+                                    <div class="short-box clearfix">
+                                        <p>Filtrele</p>
+                                        <div class="select-box">
+                                            <select class="wide" id="sort-select" onchange="applySorting()">
+                                                <option value="">Seçiniz</option>
+                                                <option value="1">Fiyat'a Göre (Artan)</option>
+                                                <option value="2">Fiyat'a Göre (Azalan)</option>
+                                                <option value="4">Alfabeye Göre</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-lg-4 col-md-6 col-sm-12 shop-block">
+                                        <div class="shop-block-one">
+                                            <div class="inner-box">
+                                                <figure class="image-box"><img src="@item.ImageUrl" alt=""></figure>
+                                                <div class="lower-content">
+                                                    <span class="price-box">₺@item.Price</span>
+                                                    <h3><a href="/Shop/ShopDetail/@item.Id">@item.Title</a></h3>
+                                                    <div class="cart-btn"><a href="/Shop/ShopDetail/@item.Id" class="theme-btn-two">Sepete Ekle</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="pagination-wrapper centred">
+                                <pager asp-action="Index" asp-controller="Shop" list="@Model" options="customOptions"></pager>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @await Component.InvokeAsync("UiFooterComponent")
+    </div>
+
+    @await Component.InvokeAsync("UiScriptComponent")
+
+    <script>
+        function applySorting() {
+            var sortValue = document.getElementById('sort-select').value;
+            var currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set("sort", sortValue);
+            window.location.href = currentUrl.toString();
+        }
+
+        $(document).on('click', '#price-filter-submit', function (e) {
+            e.preventDefault();
+            var priceRange = $('.property-amount').val();
+            if (!priceRange) return;
+
+            // "₺100 - ₺500" formatından sayıları ayıkla
+            var prices = priceRange.replace(/[^\d -]/g, '').split('-');
+
+            if (prices.length >= 2) {
+                var min = prices[0].trim();
+                var max = prices[1].trim();
+
+                var currentUrl = new URL(window.location.href);
+                // Eğer sayfa 2'deysek filtreleme yapınca 1. sayfaya dönmek için
+                currentUrl.searchParams.delete("page");
+                currentUrl.searchParams.set("minPrice", min);
+                currentUrl.searchParams.set("maxPrice", max);
+
+                window.location.href = currentUrl.toString();
+            }
+        });
+
+        $(document).ready(function () {
+            var successMessage = '@TempData["message"]';
+            if (successMessage == "login required") {
+                swal({
+                    title: "Dikkat",
+                    text: "Ürün satın alabilmek için önce giriş yapmanız gerekiyor!",
+                    icon: "warning",
+                    buttons: { cancel: "Tamam", confirm: "Giriş Yap" }
+                }).then(function (willLogin) {
+                    if (willLogin) window.location.href = "/Login/CustomerLogin";
+                });
+            }
+        });
+    </script>
+</body>
+</html>

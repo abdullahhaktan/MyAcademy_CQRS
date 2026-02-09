@@ -1,0 +1,57 @@
+﻿@model List<GetCategoriesQueryResult>
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 p-8 space-y-6 font-display">
+
+    <div class="flex justify-between items-center">
+        <div>
+            <h2 class="text-3xl font-black">Kategoriler</h2>
+            <p class="text-gray-500">Sistemde tanımlı kategoriler</p>
+        </div>
+
+        <a href="/Admin/Category/CreateCategory"
+           class="bg-primary text-white px-5 py-2.5 rounded-lg font-bold no-underline">
+            Yeni Kategori
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        @foreach (var item in Model)
+        {
+            <div class="bg-white rounded-xl border shadow p-5 space-y-3">
+
+                <div class="flex items-center gap-3">
+                    <span class="@item.Icon text-2xl text-primary"></span>
+                    <h4 class="text-lg font-bold">@item.Name</h4>
+                </div>
+
+                <p class="text-gray-600 text-sm line-clamp-3">
+                    @item.Description
+                </p>
+
+                <div class="flex justify-between items-center pt-3">
+                    <span class="text-xs text-gray-500">
+                        @item.Products.Count ürün
+                    </span>
+
+                    <div class="flex gap-2">
+                        <a href="/Admin/Category/UpdateCategory/@item.Id"
+                           class="text-primary font-semibold">
+                            Düzenle
+                        </a>
+                        <a href="/Admin/Category/DeleteCategory/@item.Id"
+                           onclick="return confirm('Silmek istiyor musunuz?')"
+                           class="text-red-600 font-semibold">
+                            Sil
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+
+</div>

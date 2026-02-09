@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("UiHeadComponent")
+
+<body>
+
+    <div class="boxed_wrapper">
+
+        @await Component.InvokeAsync("UiPreloadComponent")
+
+        @await Component.InvokeAsync("UiSidebarAndSocialMediaComponent")
+
+        @await Component.InvokeAsync("UiSidebarComponent")
+
+        @await Component.InvokeAsync("UiMobileMenuComponent")
+
+        @await Component.InvokeAsync("UiBannerComponent")
+
+        @await Component.InvokeAsync("UiFeatureComponent")
+
+        @await Component.InvokeAsync("UiOurStoryComponent")
+
+        @await Component.InvokeAsync("UiProductComponent")
+
+        @await Component.InvokeAsync("UiServiceComponent")
+
+        @await Component.InvokeAsync("UiGalleryComponent")
+
+        @await Component.InvokeAsync("UiPromotionComponent")
+
+        @await Component.InvokeAsync("UiTestimonialComponent")
+
+        @await Component.InvokeAsync("UiBlogComponent")
+
+        @await Component.InvokeAsync("UiFooterComponent")
+
+    </div>
+
+    @await Component.InvokeAsync("UiScriptComponent")
+
+</body>
+</html>

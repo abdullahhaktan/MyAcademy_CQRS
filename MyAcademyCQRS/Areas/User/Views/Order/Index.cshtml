@@ -1,0 +1,189 @@
+﻿@using System.Text.Json
+@model List<GetOrdersByUserIdQueryResult>
+
+@{
+    ViewData["Title"] = "Siparişlerim";
+    Layout = "~/Areas/User/Views/UserLayout/Index.cshtml";
+}
+
+<div class="space-y-6">
+
+    <!-- Header -->
+    <div>
+        <h1 class="text-2xl font-bold">Siparişlerim</h1>
+        <p class="text-slate-500 text-sm">
+            Satın aldığınız ürünlerin listesi
+        </p>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="bg-white rounded-2xl p-10 text-center border">
+            <span class="material-symbols-outlined text-5xl text-slate-400 mb-4">
+                shopping_bag
+            </span>
+            <h2 class="text-lg font-semibold">Henüz siparişiniz yok</h2>
+        </div>
+    }
+    else
+    {
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            @foreach (var order in Model)
+            {
+                <div class="bg-white rounded-2xl border hover:shadow-lg transition">
+
+                    <!-- Header -->
+                    <div class="p-5 border-b flex justify-between items-center">
+                        <span class="font-semibold text-primary">
+                            Sipariş #@order.Id
+                        </span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-slate-100">
+                            @order.Status
+                        </span>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="p-5 space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Tarih</span>
+                            <span>@order.CreatedDate.ToString("dd MMM yyyy")</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Ürün Sayısı</span>
+                            <span>@(order.OrderItems?.Count() ?? 0)</span>
+                        </div>
+
+                        <div class="flex justify-between font-semibold">
+                            <span>Toplam</span>
+                            <span class="text-primary">
+                                @order.TotalPrice.ToString("₺0.00")
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="p-4 bg-slate-50 flex justify-end">
+                        <button onclick="openModal(@order.Id)"
+                                class="text-primary text-sm hover:underline">
+                            Detayları Gör
+                        </button>
+                    </div>
+
+                    <!-- SAFE JSON -->
+                    <script type="application/json" id="order-@order.Id">
+                        @Html.Raw(JsonSerializer.Serialize(new
+                        {
+                                id = order.Id,
+                                        status = order.Status,
+                                        date = order.CreatedDate.ToString("dd MMM yyyy"),
+                                        total = order.TotalPrice.ToString("₺0.00"),
+                                        items = order.OrderItems?.Select(i => new
+                                        {
+                                                name = i.Product.Title,
+                                                price = i.UnitPrice.ToString("₺0.00"),
+                                                quantity = i.Quantity
+                                        }) ?? Enumerable.Empty<object>()
+                                }))
+            </script>
+                </div>
+            }
+
+        </div>
+    }
+</div>
+
+<!-- MODAL -->
+<div id="orderModal"
+     class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+    <div class="bg-white rounded-2xl w-full max-w-3xl mx-4 overflow-hidden">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center px-6 py-4 border-b">
+            <h2 class="text-lg font-semibold">Sipariş Detayı</h2>
+            <button onclick="closeModal()" class="text-slate-500 hover:text-black">✕</button>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 space-y-6">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div>
+                    <span class="text-slate-500">Sipariş No</span>
+                    <div id="modalOrderId" class="font-semibold"></div>
+                </div>
+                <div>
+                    <span class="text-slate-500">Durum</span>
+                    <div id="modalStatus" class="font-semibold"></div>
+                </div>
+                <div>
+                    <span class="text-slate-500">Tarih</span>
+                    <div id="modalDate"></div>
+                </div>
+                <div>
+                    <span class="text-slate-500">Toplam</span>
+                    <div id="modalTotal" class="font-semibold text-primary"></div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-semibold mb-3">Ürünler</h3>
+
+                <table class="w-full text-sm border rounded-lg">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th class="text-left px-4 py-2">Ürün</th>
+                            <th class="text-center px-4 py-2">Adet</th>
+                            <th class="text-right px-4 py-2">Fiyat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modalItems"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script>
+    function openModal(id) {
+        const data = JSON.parse(document.getElementById(`order-${id}`).textContent);
+
+        document.getElementById("modalOrderId").innerText = "#" + data.id;
+        document.getElementById("modalStatus").innerText = data.status;
+        document.getElementById("modalDate").innerText = data.date;
+        document.getElementById("modalTotal").innerText = data.total;
+
+        const tbody = document.getElementById("modalItems");
+        tbody.innerHTML = "";
+
+        if (data.items.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="3" class="text-center py-4 text-slate-500">
+                        Ürün bulunamadı
+                    </td>
+                </tr>`;
+        } else {
+            data.items.forEach(i => {
+                tbody.innerHTML += `
+                    <tr class="border-t">
+                        <td class="px-4 py-2">${i.name}</td>
+                        <td class="px-4 py-2 text-center">${i.quantity}</td>
+                        <td class="px-4 py-2 text-right">${i.price}</td>
+                    </tr>`;
+            });
+        }
+
+        document.getElementById("orderModal").classList.remove("hidden");
+        document.getElementById("orderModal").classList.add("flex");
+    }
+
+    function closeModal() {
+        document.getElementById("orderModal").classList.add("hidden");
+        document.getElementById("orderModal").classList.remove("flex");
+    }
+</script>

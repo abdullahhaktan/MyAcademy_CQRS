@@ -1,0 +1,190 @@
+﻿@model List<GetOrdersQueryResult>
+
+@{
+    ViewBag.Title = "Siparişler";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 p-8 space-y-8 font-display">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-black tracking-tight">Siparişler</h2>
+            <p class="text-gray-500 mt-1">Sistemdeki tüm sipariş kayıtları</p>
+        </div>
+    </div>
+
+    <!-- TABLE CARD -->
+    <div class="bg-white dark:bg-[#151b2b] rounded-2xl border shadow-sm overflow-hidden">
+
+        <table class="w-full text-sm">
+            <thead class="bg-gray-50 dark:bg-gray-800/40">
+                <tr class="text-gray-500">
+                    <th class="p-5 text-left font-bold uppercase">Sipariş</th>
+                    <th class="p-5 text-left font-bold uppercase">Kullanıcı</th>
+                    <th class="p-5 text-left font-bold uppercase">Tarih</th>
+                    <th class="p-5 text-left font-bold uppercase">Durum</th>
+                    <th class="p-5 text-right font-bold uppercase">Toplam</th>
+                    <th class="p-5 text-right font-bold uppercase">Detay</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y">
+                @foreach (var item in Model)
+                {
+                    <tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/40 transition">
+                        <td class="p-5 font-semibold text-primary">
+                            #@item.Id
+                        </td>
+
+                        <td class="p-5">
+                            <div class="font-semibold">@item.User?.UserName</div>
+                        </td>
+
+                        <td class="p-5 text-gray-500">
+                            @item.CreatedDate.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td class="p-5">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold
+                                                @(item.Status.ToString().ToLower() == "shipped" ? "bg-green-100 text-green-700" : item.Status.ToString().ToLower() == "completed" ? "bg-green-100 text-green-700" :
+                                                                                                                                        item.Status.ToString().ToLower() == "pending" ? "bg-yellow-100 text-yellow-700" :
+                                                                                                                                        "bg-red-100 text-red-700")">
+                                
+                                @{ var value = ""; }
+                                
+                                @if (item.Status.ToLower() == "shipped")
+                                {
+                                    value = "Kargoya Verildi";
+                                }
+                                @if (item.Status.ToLower()=="completed")
+                                {
+                                    value = "Tamamlandı";
+                                }
+                                @if(item.Status.ToLower()=="pending")
+                                {
+                                    value = "Beklemede";
+                                }
+                                @if (item.Status.ToLower() == "cancelled")
+                                {
+                                    value = "İptal Edildi";
+                                }
+
+                                @value
+                            </span>
+                        </td>
+
+                        <td class="p-5 text-right font-mono font-bold">
+                            @item.TotalPrice ₺
+                        </td>
+
+                        <td class="p-4 text-right">
+                            <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition">
+
+                                <!-- Detay -->
+                                <button onclick="openModal(@item.Id)"
+                                        class="p-2 rounded-lg hover:bg-blue-100 text-blue-600">
+                                    <span class="material-symbols-outlined text-[20px]">Detay</span>
+                                </button>
+
+                                <!-- Güncelle -->
+                                <a href="/Admin/Order/UpdateOrder/@item.Id"
+                                   class="p-2 rounded-lg hover:bg-yellow-100 text-yellow-600">
+                                    <span class="material-symbols-outlined text-[20px]">Güncelle</span>
+                                </a>
+
+                                <!-- Sil -->
+                                <a href="/Admin/Order/DeleteOrder/@item.Id"
+                                   onclick="return confirm('Sipariş silinsin mi?')"
+                                   class="p-2 rounded-lg hover:bg-red-100 text-red-600">
+                                    <span class="material-symbols-outlined text-[20px]">Sil</span>
+                                </a>
+
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div id="orderModal"
+     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+
+    <div class="bg-white dark:bg-[#151b2b] w-full max-w-3xl rounded-2xl shadow-xl p-8 relative">
+
+        <button onclick="closeModal()"
+                class="absolute top-5 right-5 text-gray-400 hover:text-red-500 transition">
+            ✕
+        </button>
+
+        <h3 id="modalTitle" class="text-2xl font-black mb-6"></h3>
+
+        <div class="border rounded-xl overflow-hidden">
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50 dark:bg-gray-800/40">
+                    <tr class="text-gray-500">
+                        <th class="p-4 text-left">Ürün</th>
+                        <th class="p-4 text-center">Adet</th>
+                        <th class="p-4 text-right">Birim</th>
+                        <th class="p-4 text-right">Toplam</th>
+                    </tr>
+                </thead>
+
+                <tbody id="orderItemsBody" class="divide-y">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <div class="bg-primary/10 text-primary px-6 py-3 rounded-xl text-lg font-black">
+                Toplam: <span id="modalTotal"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function openModal(orderId) {
+        fetch(`/Admin/Order/GetOrderDetail?id=${orderId}`)
+            .then(res => res.json())
+            .then(data => {
+
+                document.getElementById("modalTitle").innerText =
+                    `Sipariş Detayı #${data.id}`;
+
+                let body = "";
+                let total = 0;
+
+                data.orderItems.forEach(item => {
+                    let lineTotal = item.unitPrice * item.quantity;
+                    total += lineTotal;
+
+                    body += `
+                        <tr>
+                            <td class="py-3 font-semibold">${item.productTitle}</td>
+                            <td class="py-3 text-center">${item.quantity}</td>
+                            <td class="py-3 text-right">${item.unitPrice} ₺</td>
+                            <td class="py-3 text-right font-bold">${lineTotal} ₺</td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById("orderItemsBody").innerHTML = body;
+                document.getElementById("modalTotal").innerText = total + " ₺";
+
+                document.getElementById("orderModal").classList.remove("hidden");
+                document.getElementById("orderModal").classList.add("flex");
+            });
+    }
+
+    function closeModal() {
+        document.getElementById("orderModal").classList.add("hidden");
+        document.getElementById("orderModal").classList.remove("flex");
+    }
+</script>

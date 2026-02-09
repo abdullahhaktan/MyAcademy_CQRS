@@ -1,0 +1,54 @@
+﻿@model List<GetProductsQueryResult>
+
+@*
+    Ui Product Component
+*@
+
+<style>
+    .shop-block-one .image-box {
+        width: 100%;
+        height: 250px; /* istediğin sabit yükseklik */
+        overflow: hidden;
+    }
+
+        .shop-block-one .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* kırpar ama oranı bozmadan doldurur */
+        }
+</style>
+
+<section class="shop-section" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/shop-1.jpg');">
+    <div class="auto-container">
+        <div class="sec-title">
+            <p>Mağazamız</p>
+            <h2>Tüm lezzetlerimiz <br /> Ürünler.</h2>
+        </div>
+        <div class="four-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+            @foreach(var item in Model)
+            {
+                <div class="shop-block-one">
+                    <div class="inner-box">
+                        <figure class="image-box">
+                            <img src="@item.ImageUrl" alt="">
+                        </figure>
+                        <div class="lower-content">
+                            <span class="price-box">₺@item.Price</span>
+                            <h3><a href="shop-details.html">@item.Title</a></h3>
+                            <h6><a href="shop-details.html">@item.Description</a></h6>
+                            <ul class="rating clearfix">
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                            </ul>
+                            <div class="cart-btn"><a href="shop-details.html" class="theme-btn-two">Sepete ekle</a></div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

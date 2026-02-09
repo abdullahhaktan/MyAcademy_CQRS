@@ -1,0 +1,33 @@
+﻿@model List<GetTestimonialsQueryResult>
+@*
+    Ui Testimonial Component
+*@
+
+<section class="testimonial-section sec-pad" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/testimonial-1.jpg');">
+    <figure class="image-layer wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/resource/testimonial-1.png" alt=""></figure>
+    <div class="auto-container">
+        <div class="inner-box">
+            <div class="sec-title">
+                <p>Müşteri Yorumları</p>
+                <h2>Müşterilerimiz Bagery Hakkında Ne Diyor?</h2>
+            </div>
+            <div class="single-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+                @foreach(var item in Model)
+                {
+                    <div class="testimonial-block-one">
+                        <div class="icon-box" style="background-image: url('@item.ImageUrl');">
+                            <i class="icon-Quote"></i>
+                        </div>
+                        <div class="text">
+                            <p>@item.Comment</p>
+                        </div>
+                        <div class="author-info">
+                            <h4>@item.FullName</h4>
+                            <span class="designation">@item.Title</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

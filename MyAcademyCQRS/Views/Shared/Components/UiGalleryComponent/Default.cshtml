@@ -1,0 +1,169 @@
+﻿@model List<GetCategoriesQueryResult>
+
+<style>
+    /* ==============================
+           CAROUSEL GENEL AYAR
+        ============================== */
+    .project-carousel {
+        position: relative;
+        padding-bottom: 90px; /* oklar için alan */
+    }
+
+        /* ==============================
+           OWL NAV OKLAR
+        ============================== */
+        .project-carousel .owl-nav {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+            .project-carousel .owl-nav button {
+                width: 55px;
+                height: 55px;
+                background: #fff !important;
+                border: none;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+                font-size: 22px;
+                color: #000;
+                transition: all 0.3s ease;
+            }
+
+                .project-carousel .owl-nav button:hover {
+                    background: #000 !important;
+                    color: #fff;
+                }
+
+    /* ==============================
+           ÜRÜN KARTI
+        ============================== */
+    .image-box {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .image-box img {
+            width: 100%;
+            display: block;
+        }
+
+        .image-box .view-btn {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+        }
+
+            .image-box .view-btn a {
+                width: 50px;
+                height: 50px;
+                background: rgba(0,0,0,0.7);
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                font-size: 20px;
+            }
+
+    .lower-content {
+        margin-top: 15px;
+    }
+
+    /* ==============================
+           MOBİL
+        ============================== */
+    @@media (max-width: 768px) {
+        .project-carousel
+
+    {
+        padding-bottom: 70px;
+    }
+
+    }
+
+    /* ==============================
+       KATEGORİ / GALERİ GÖRSELLERİ
+    ============================== */
+    .project-block-one .image-box {
+        width: 100%;
+        height: 260px; /* masaüstü için sabit yükseklik */
+        overflow: hidden;
+        border-radius: 10px; /* opsiyonel – kart estetiği */
+    }
+
+        .project-block-one .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* oranı bozmadan doldurur */
+            transition: transform 0.4s ease;
+        }
+
+        /* Hover zoom efekti (opsiyonel ama çok yakışır) */
+        .project-block-one .image-box:hover img {
+            transform: scale(1.08);
+        }
+
+</style>
+
+<section class="project-section"
+         style="background-image:url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/gallery-1.jpg');">
+
+    <div class="auto-container">
+        <div class="row clearfix">
+
+            <!-- SOL YAZI ALANI -->
+            <div class="col-lg-4 col-md-12 content-column">
+                <div class="content-box">
+                    <div class="sec-title">
+                        <h2>Galeriye Göz Atalım</h2>
+                        <p>Bagery'nin enfes lezzetlerinden birbirinden güzel kareler.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAĞ CAROUSEL -->
+            <div class="col-lg-8 col-md-12 project-column">
+
+                @foreach (var category in Model)
+                {
+                    if (category.Products != null && category.Products.Any())
+                    {
+                        <h3 class="mb-30">@category.Name</h3>
+
+                        <div class="project-carousel owl-carousel owl-theme mb-60">
+
+                            @foreach (var product in category.Products)
+                            {
+                                <div class="project-block-one">
+                                    <div class="inner-box">
+
+                                        <figure class="image-box">
+                                            <img src="@product.ImageUrl" alt="@product.Title" />
+                                            <div class="view-btn">
+                                                <a href="/Shop/ShopDetail/@product.Id">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </figure>
+
+                                        <div class="lower-content">
+                                            <h4>@product.Title</h4>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    }
+                }
+
+            </div>
+
+        </div>
+    </div>
+</section>

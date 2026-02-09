@@ -1,0 +1,44 @@
+﻿@model GetStoryByIdQueryResult
+
+@*
+    Our Story Component
+*@
+
+<section class="ourstory-section sec-pad" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/mission-1.jpg');">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>Hikayemiz</p>
+            <h2>Geleneksel ve Modern Hizmet <br />1970'den beri</h2>
+        </div>
+        <div class="row align-items-center clearfix">
+            <div class="col-lg-4 col-md-6 col-sm-12 content-column">
+                <div id="content_block_1">
+                    <div class="content-box">
+                        <h3>Bagery hakkında</h3>
+                        <p>@Model.Description</p>
+                        <figure class="signature"><img src="/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/signature-1.png" alt=""></figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 image-column">
+                <figure class="image-box wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/resource/ice-cream-1.png" alt=""></figure>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 content-column">
+                <div id="content_block_2">
+                    <div class="content-box">
+                        <h3>Bagery Genel Bakış</h3>
+                        <p>@Model.Description1</p>
+                        <ul class="list clearfix">
+                            <li><i class="icon-Check-mark"></i>@Model.Item1</li>
+                            <li><i class="icon-Check-mark"></i>@Model.Item2</li>
+                            <li><i class="icon-Check-mark"></i>@Model.Item3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="more-btn centred">
+            <a href="/Contact/Index" class="theme-btn-one">Bizimle iletişime geç</a>
+        </div>
+    </div>
+</section>

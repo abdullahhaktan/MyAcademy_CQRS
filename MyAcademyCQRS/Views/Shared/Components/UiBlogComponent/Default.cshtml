@@ -1,0 +1,39 @@
+﻿@model List<GetBlogsQueryResult>
+
+@*
+   Ui Blog Component
+*@
+
+<section class="news-section sec-pad" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/news-bg-1.jpg');">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>BİZİ TAKİP EDİN</p>
+            <h2>Daha Fazla Bilgi İçin <br />Bagery Haberleri</h2>
+        </div>
+        <div class="row clearfix">
+            @foreach(var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 news-block">
+                    <div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <figure class="image-box">
+                                <span class="category">Bakery</span>
+                                <a href="blog-details.html"><img src="assets/images/news/news-1.jpg" alt=""></a>
+                            </figure>
+                            <div class="lower-content">
+                                <ul class="post-info clearfix">
+                                    <li>@item.CreatedDate.ToShortDateString()</li>
+                                    <li>/</li>
+                                    <li><a href="blog-details.html">by Admin</a></li>
+                                </ul>
+                                <h3><a href="blog-details.html">@item.Title</a></h3>
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

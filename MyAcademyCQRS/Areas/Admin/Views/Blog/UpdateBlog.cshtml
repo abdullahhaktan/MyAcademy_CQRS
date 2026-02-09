@@ -1,0 +1,40 @@
+﻿@model UpdateBlogCommand
+
+@{
+    ViewData["Title"] = "Blog Güncelle";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="p-8 max-w-3xl">
+    <h2 class="text-2xl font-bold mb-6">✏️ Blog Güncelle</h2>
+
+    <form method="post" class="space-y-5">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Başlık</label>
+            <input asp-for="Title"
+                   class="w-full rounded-lg border-slate-300 dark:bg-slate-800 dark:border-slate-700" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Açıklama</label>
+            <textarea asp-for="Description"
+                      rows="5"
+                      class="w-full rounded-lg border-slate-300 dark:bg-slate-800 dark:border-slate-700"></textarea>
+        </div>
+
+        <div class="flex gap-3">
+            <button type="submit"
+                    class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition">
+                Güncelle
+            </button>
+
+            <a href="/Admin/Blog/Index"
+               class="px-6 py-2 rounded-lg border border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800">
+                İptal
+            </a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,83 @@
+﻿@model List<GetPromotionsQueryResult>
+
+@*
+    Ui Promotion Component
+*@
+
+<style>
+    /* ==============================
+       PROMOTION IMAGE
+    ============================== */
+    .promotion-section .image-box {
+        width: 100%;
+        height: 360px; /* masaüstü için sabit yükseklik */
+        overflow: hidden;
+        border-radius: 14px; /* opsiyonel */
+    }
+
+        .promotion-section .image-box .image {
+            width: 100%;
+            height: 100%;
+        }
+
+        .promotion-section .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* oranı bozmadan doldurur */
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        /* Hover efekti (opsiyonel) */
+        .promotion-section .image-box:hover img {
+            transform: scale(1.06);
+        }
+
+</style>
+
+<section class="promotion-section sec-pad" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/background/promotion-1.jpg');">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>Promosyon</p>
+            <h2>Tüm Lezzetleri Kontrol Et <br />Yaz Promosyonu</h2>
+        </div>
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            var result = count % 2;
+
+            // Animasyon
+            var value = result == 0 ? "slideInLeft" : "slideInRight";
+
+            // Kolon sıraları için iki farklı değişken
+            var imageColClass = result == 0 ? "image-column" : "image-column order-lg-2";
+            var contentColClass = result == 0 ? "content-column" : "content-column order-lg-1";
+
+            <div class="inner-box mb-50 wow @value animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                <div class="row clearfix">
+                    <!-- Image Column -->
+                    <div class="col-lg-6 col-md-12 col-sm-12 @imageColClass">
+                        <div class="image-box clearfix mr-10">
+                            <figure class="image"><img src="@item.ImageUrl" alt=""></figure>
+                        </div>
+                    </div>
+                    <!-- Content Column -->
+                    <div class="col-lg-6 col-md-12 col-sm-12 @contentColClass">
+                        <div class="content-box ml-10">
+                            <div class="price-box" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-4.png');">
+                                <span>₺@item.Price</span>
+                                <p>Sadece</p>
+                            </div>
+                            <h3>@item.Title</h3>
+                            <p>@item.Description</p>
+                            <div class="btn-box"><a href="index.html" class="theme-btn-two">Hemen Sipariş Verelim</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            count++;
+        }
+    </div>
+</section>

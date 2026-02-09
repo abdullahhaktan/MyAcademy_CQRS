@@ -1,0 +1,209 @@
+﻿@model List<GetOrdersQueryResult>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/UserLayout/Index.cshtml";
+}
+
+<main class="flex-1 space-y-8">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-orange-50 to-amber-50 dark:from-slate-900 dark:to-slate-800 p-8 rounded-3xl shadow-lg border border-orange-100 dark:border-slate-700 overflow-hidden">
+        <div class="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800/[0.1] opacity-20"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+                        <span class="material-icons-outlined text-white">restaurant</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Hoş Geldin, @ViewBag.fullName! 👋</h1>
+                </div>
+                <p class="text-slate-600 dark:text-slate-300 text-lg max-w-2xl">Lezzet yolculuğuna devam et! Bugün senin için özel hazırlanan taze ürünlerimizle tanışmaya hazır mısın?</p>
+            </div>
+            <a href="/Shop/Index" class="group relative bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-3 w-fit shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <span class="relative z-10">Yeni Sipariş Oluştur</span>
+                <span class="material-icons-outlined text-sm relative z-10 transition-transform group-hover:translate-x-1">arrow_forward</span>
+                <div class="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </a>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute -right-20 -top-20 w-80 h-80 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-3xl"></div>
+        <div class="absolute -left-10 -bottom-10 w-60 h-60 bg-accent/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-transparent rounded-full"></div>
+    </section>
+
+    <!-- Stats Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="group relative bg-white dark:bg-slate-900 p-6 rounded-2xl border border-orange-100 dark:border-slate-800 hover:border-primary/30 dark:hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative flex items-center gap-5">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg">
+                    <span class="material-icons-outlined text-3xl">local_shipping</span>
+                </div>
+                <div>
+                    <p class="text-sm text-slate-500 mb-1">Aktif Sipariş</p>
+                    <p class="text-2xl font-bold text-slate-800 dark:text-white">@ViewBag.totalActiveOrderCount</p>
+                </div>
+            </div>
+            <div class="relative mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <p class="text-xs text-slate-400">Yolda veya hazırlanıyor</p>
+            </div>
+        </div>
+
+        <div class="group relative bg-white dark:bg-slate-900 p-6 rounded-2xl border border-orange-100 dark:border-slate-800 hover:border-pink-300 dark:hover:border-pink-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-pink-50 to-transparent dark:from-pink-900/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative flex items-center gap-5">
+                <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl flex items-center justify-center shadow-lg">
+                    <span class="material-icons-outlined text-3xl">shopping_bag</span>
+                </div>
+                <div>
+                    <p class="text-sm text-slate-500 mb-1">Aktif Sipariş Ürün Sayısı</p>
+                    <p class="text-2xl font-bold text-slate-800 dark:text-white">@ViewBag.totalActiveOrderItemCount</p>
+                </div>
+            </div>
+            <div class="relative mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <p class="text-xs text-slate-400">Toplam ürün adedi</p>
+            </div>
+        </div>
+
+        <div class="group relative bg-white dark:bg-slate-900 p-6 rounded-2xl border border-orange-100 dark:border-slate-800 hover:border-orange-300 dark:hover:border-orange-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent dark:from-orange-900/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative flex items-center gap-5">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary to-orange-600 text-white rounded-2xl flex items-center justify-center shadow-lg">
+                    <span class="material-icons-outlined text-3xl">payments</span>
+                </div>
+                <div>
+                    <p class="text-sm text-slate-500 mb-1">Toplam Harcama</p>
+                    <p class="text-2xl font-bold text-slate-800 dark:text-white">@ViewBag.totalPriceAmount ₺</p>
+                </div>
+            </div>
+            <div class="relative mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <p class="text-xs text-slate-400">Tüm zamanlar</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Son Siparişlerim (Tam Genişlik) -->
+    <section class="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-sm border border-orange-100 dark:border-slate-800">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-2xl font-bold font-display bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">Son Siparişlerim</h2>
+                <p class="text-slate-500 text-sm mt-1">Geçmiş siparişlerinizin detaylı görünümü</p>
+            </div>
+            <a href="#" class="group relative text-sm font-semibold text-primary hover:text-secondary transition-colors flex items-center gap-2">
+                Tümünü Gör
+                <span class="material-icons-outlined text-base transition-transform group-hover:translate-x-1">arrow_forward</span>
+            </a>
+        </div>
+
+        <div class="space-y-6">
+            @foreach (var item in Model)
+            {
+                <div class="group relative bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary/30 dark:hover:border-primary/50 hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <!-- Background pattern -->
+                    <div class="absolute right-0 top-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-transparent rounded-full -translate-y-16 translate-x-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    <!-- ÜST KISIM -->
+                    <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl flex items-center justify-center">
+                                    <span class="material-icons-outlined text-primary">receipt_long</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-500">
+                                        Sipariş No:
+                                        <span class="font-semibold text-slate-800 dark:text-slate-200 ml-1">
+                                            #@item.Id
+                                        </span>
+                                    </p>
+                                    <p class="text-xs text-slate-400 flex items-center gap-1">
+                                        <span class="material-icons-outlined text-xs">schedule</span>
+                                        @item.CreatedDate.ToString("dd MMMM yyyy • HH:mm")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="text-xs font-semibold px-4 py-2 rounded-full border transition-all duration-300
+                                @(item.Status == "Teslim Edildi"
+                                                              ? "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400 border-green-200 dark:border-green-800"
+                                                              : "bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 border-orange-200 dark:border-orange-800")
+                            group-hover:scale-105">
+                        <span class="material-icons-outlined text-sm mr-1 align-middle">@(item.Status == "Teslim Edildi" ? "check_circle" : "pending")</span>
+                        @item.Status
+                    </span>
+                </div>
+
+                    <!-- ÜRÜNLER -->
+                    <div class="relative space-y-4 mb-6">
+                    @foreach (var orderItem in item.OrderItems)
+                        {
+                            <div class="flex items-center gap-4 p-3 rounded-xl bg-white/50 dark:bg-slate-800/30 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                                <div class="relative">
+                                    <img src="@orderItem.Product.ImageUrl"
+                                         alt="@orderItem.Product.Title"
+                                         class="w-14 h-14 rounded-xl object-cover bg-white border border-slate-200 dark:border-slate-700 shadow-sm" />
+                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-primary text-white text-xs rounded-full flex items-center justify-center">
+                                        @orderItem.Quantity
+                                    </div>
+                                </div>
+
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">
+                                        @orderItem.Product.Title
+                                    </p>
+                                    <p class="text-xs text-slate-500 mt-1">
+                                        Birim fiyat: ₺@orderItem.UnitPrice
+                                    </p>
+                                </div>
+
+                                <div class="text-right">
+                                    <p class="text-sm font-bold text-slate-800 dark:text-white">
+                                        ₺@(orderItem.Quantity* orderItem.UnitPrice)
+                                    </p>
+                                    <p class="text-xs text-slate-400">
+                                        @orderItem.Quantity × ₺@orderItem.UnitPrice
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- ALT KISIM -->
+                    <div class="relative flex justify-between items-center pt-6 border-t border-slate-200 dark:border-slate-700">
+                        <div class="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                            <span class="material-icons-outlined text-sm">payments</span>
+                            <p class="text-sm">Toplam Tutar</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                                ₺@item.TotalPrice
+                            </p>
+                            <p class="text-xs text-slate-500">Kargo dahil</p>
+                        </div>
+                    </div>
+
+                    <!-- Hover effect border -->
+                    <div class="absolute inset-0 border-2 border-primary/0 rounded-2xl group-hover:border-primary/10 transition-all duration-300 pointer-events-none"></div>
+                </div>
+            }
+        </div>
+
+        <!-- Boş durum -->
+        @if (!Model.Any())
+        {
+            <div class="text-center py-12">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 rounded-2xl flex items-center justify-center">
+                    <span class="material-icons-outlined text-3xl text-slate-400">shopping_bag</span>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">Henüz siparişiniz yok</h3>
+                <p class="text-slate-500 dark:text-slate-400 mb-6">İlk siparişinizi vermek için hemen alışverişe başlayın!</p>
+                <a href="/Shop/Index" class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white px-6 py-3 rounded-xl font-semibold transition-all">
+                    <span class="material-icons-outlined">shopping_cart</span>
+                    Alışverişe Başla
+                </a>
+            </div>
+        }
+    </section>
+</main>

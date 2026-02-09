@@ -1,0 +1,172 @@
+﻿@{
+    Layout = null;
+    var path = Context.Request.Path.Value?.ToLower() ?? "";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bagery - Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#F59E0B",
+                        "sidebar-dark": "#18181B",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#111827",
+                    },
+                    fontFamily: {
+                        display: ["Plus Jakarta Sans", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .sidebar-item-active {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #F59E0B;
+            border-right: 3px solid #F59E0B;
+        }
+        /* İnce scrollbar tasarımı */
+        nav::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+
+    <div class="flex min-h-screen">
+
+        <aside class="w-64 bg-sidebar-dark text-slate-300 hidden md:flex flex-col border-r border-slate-800 sticky top-0 h-screen">
+
+            <div class="p-6 flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                    <span class="material-icons-round text-white">bakery_dining</span>
+                </div>
+                <span class="text-xl font-bold text-white">
+                    Bagery <span class="text-primary">Admin</span>
+                </span>
+            </div>
+
+            <nav class="flex-1 px-4 space-y-1 flex flex-col overflow-y-auto pb-4">
+
+                <a href="/Admin/Dashboard/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/dashboard") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3">dashboard</span>
+                    <span class="text-sm font-medium">Dashboard</span>
+                </a>
+
+                <div class="pt-5 pb-2 px-4 text-xs font-semibold text-slate-500 uppercase">Satış Yönetimi</div>
+
+                <a href="/Admin/Order/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/order") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">shopping_cart</span>
+                    <span class="text-sm font-medium">Siparişler</span>
+                </a>
+                <a href="/Admin/Product/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/product") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">inventory_2</span>
+                    <span class="text-sm font-medium">Ürünler</span>
+                </a>
+                <a href="/Admin/Category/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/category") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">category</span>
+                    <span class="text-sm font-medium">Kategoriler</span>
+                </a>
+
+                <div class="pt-5 pb-2 px-4 text-xs font-semibold text-slate-500 uppercase">İçerik Yönetimi</div>
+
+                <a href="/Admin/Service/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/service") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">home_repair_service</span>
+                    <span class="text-sm font-medium">Hizmetlerimiz</span>
+                </a>
+                <a href="/Admin/Blog/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/blog") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">article</span>
+                    <span class="text-sm font-medium">Blog Yazıları</span>
+                </a>
+                <a href="/Admin/Story/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/story") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">history_edu</span>
+                    <span class="text-sm font-medium">Hikayemiz</span>
+                </a>
+                <a href="/Admin/Testimonial/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/testimonial") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">reviews</span>
+                    <span class="text-sm font-medium">Müşteri Yorumları</span>
+                </a>
+
+                <div class="pt-5 pb-2 px-4 text-xs font-semibold text-slate-500 uppercase">Pazarlama</div>
+
+                <a href="/Admin/Banner/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/banner") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">view_carousel</span>
+                    <span class="text-sm font-medium">Banner/Slider</span>
+                </a>
+                <a href="/Admin/Promotion/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/promotion") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">campaign</span>
+                    <span class="text-sm font-medium">Promosyonlar</span>
+                </a>
+                <a href="/Admin/Feature/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/feature") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">star</span>
+                    <span class="text-sm font-medium">Özellikler</span>
+                </a>
+
+                <div class="pt-5 pb-2 px-4 text-xs font-semibold text-slate-500 uppercase">Sistem</div>
+
+                <a href="/Admin/User/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/user") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">people</span>
+                    <span class="text-sm font-medium">Kullanıcılar</span>
+                </a>
+                <a href="/Admin/AdminLog/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/adminlog") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">admin_panel_settings</span>
+                    <span class="text-sm font-medium">Admin Logları</span>
+                </a>
+                <a href="/Admin/CustomerLog/Index" class="flex items-center px-4 py-3 rounded-lg transition-all @(path.Contains("/admin/customerlog") ? "sidebar-item-active" : "")">
+                    <span class="material-icons-round mr-3 text-slate-500">manage_accounts</span>
+                    <span class="text-sm font-medium">Müşteri Logları</span>
+                </a>
+
+                <div class="mt-auto pt-10">
+                    <a href="/Login/Logout" class="flex items-center px-4 py-3 mb-4 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all">
+                        <span class="material-icons-round mr-3">logout</span>
+                        <span class="text-sm font-medium">Çıkış Yap</span>
+                    </a>
+                </div>
+
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            <header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex items-center justify-between px-8">
+                <h2 class="text-lg font-semibold">Yönetim Paneli</h2>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-slate-500">Hoş geldin, Admin</span>
+                </div>
+            </header>
+
+            <div class="p-8 overflow-y-auto">
+                @RenderBody()
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>

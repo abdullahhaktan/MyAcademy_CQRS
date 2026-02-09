@@ -1,0 +1,65 @@
+﻿@model List<GetServicesQueryResult>
+
+@{
+    ViewBag.Title = "Hizmetler";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 p-8 space-y-6 font-display">
+
+    <div class="flex justify-between items-center">
+        <div>
+            <h2 class="text-3xl font-black">Hizmetler</h2>
+            <p class="text-gray-500">Sistemde tanımlı hizmetler</p>
+        </div>
+
+        <a href="/Admin/Service/CreateService"
+           class="bg-primary text-white px-5 py-2.5 rounded-lg font-bold flex items-center gap-2 no-underline">
+            <span class="material-symbols-outlined">add</span>
+            Yeni Hizmet
+        </a>
+    </div>
+
+    <div class="bg-white dark:bg-[#151b2b] rounded-xl border shadow overflow-hidden">
+        <table class="w-full">
+            <thead class="bg-gray-50 dark:bg-gray-800/30">
+                <tr>
+                    <th class="p-4 text-xs font-bold uppercase text-left">Başlık</th>
+                    <th class="p-4 text-xs font-bold uppercase text-left">Açıklama</th>
+                    <th class="p-4 text-xs font-bold uppercase text-left">İkon</th>
+                    <th class="p-4 text-xs font-bold uppercase text-right">İşlemler</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y">
+                @foreach (var item in Model)
+                {
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/40 group transition">
+                        <td class="p-4 font-semibold">
+                            @item.Title
+                        </td>
+                        <td class="p-4">
+                            @item.Description
+                        </td>
+                        <td class="p-4 text-sm text-gray-500">
+                            @item.IconClass
+                        </td>
+                        <td class="p-4 text-right">
+                            <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition">
+                                <a href="/Admin/Service/UpdateService/@item.Id"
+                                   class="p-2 rounded-lg hover:bg-primary/10 text-primary">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </a>
+                                <a href="/Admin/Service/DeleteService/@item.Id"
+                                   onclick="return confirm('Silmek istiyor musunuz?')"
+                                   class="p-2 rounded-lg hover:bg-red-50 text-red-600">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

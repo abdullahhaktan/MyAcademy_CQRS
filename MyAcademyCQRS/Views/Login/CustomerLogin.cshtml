@@ -1,0 +1,125 @@
+﻿@model LoginDto
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Müşteri Girişi - Bagery</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&family=Material+Symbols+Rounded" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#F28C28",
+                        "background-light": "#FFF9F5",
+                        "background-dark": "#1A1614",
+                    },
+                    fontFamily: {
+                        display: ["Playfair Display", "serif"],
+                        sans: ["DM Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-6">
+
+    <main class="w-full max-w-md space-y-8">
+
+        <!-- Header -->
+        <header class="text-center space-y-4">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-primary shadow-xl shadow-primary/20">
+                <span class="material-symbols-rounded text-white text-5xl">cake</span>
+            </div>
+            <h1 class="text-4xl font-display font-bold">Bagery.</h1>
+            <p class="text-slate-500 dark:text-slate-400 font-medium">
+                Tatlı anılar burada başlar
+            </p>
+        </header>
+
+        <!-- Card -->
+        <div class="bg-white/80 dark:bg-white/5 ios-blur border border-white/40 dark:border-white/10 rounded-[2rem] p-8 shadow-2xl">
+
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold">Tekrar Hoşgeldiniz</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">
+                    Giriş yapmak için bilgilerinizi girin
+                </p>
+            </div>
+
+            <form method="post" class="space-y-5">
+
+                <!-- Email -->
+                <div class="space-y-2">
+                    <label class="text-sm font-semibold ml-1">Kullanıcı Adınız</label>
+                    <div class="relative">
+                        <input type="text" asp-for="UserName" required
+                               class="w-full bg-slate-100 dark:bg-slate-800/50 rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/50"
+                               placeholder="ornek@eposta.com">
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm font-semibold ml-1">
+                        <label>Şifre</label>
+                    </div>
+                    <div class="relative">
+                        <span class="material-symbols-rounded absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
+                        <input type="password" asp-for="Password" required
+                               class="w-full bg-slate-100 dark:bg-slate-800/50 rounded-2xl py-4 pl-12 pr-12 focus:ring-2 focus:ring-primary/50"
+                               placeholder="••••••••">
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit"
+                        class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-primary/30 transition active:scale-[0.98] flex items-center justify-center gap-2">
+                    Giriş Yap
+                    <span class="material-symbols-rounded">arrow_forward</span>
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-slate-500 dark:text-slate-400 text-sm">
+            Yeni misiniz?
+            <a href="#" class="text-primary font-bold hover:underline">Hesap Oluştur</a>
+        </p>
+
+    </main>
+
+</body>
+</html>
+

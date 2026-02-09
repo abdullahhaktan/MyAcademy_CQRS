@@ -1,0 +1,135 @@
+﻿@model MyAcademyCQRS.CQRSPattern.RegisterDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bagery - Kayıt Ol</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                primary: "#F28C28",
+                "background-light": "#FFF9F5",
+                "background-dark": "#1A1614",
+              },
+              fontFamily: {
+                display: ["Playfair Display", "serif"],
+                sans: ["DM Sans", "sans-serif"],
+              },
+              borderRadius: {
+                DEFAULT: "1.5rem",
+              },
+            },
+          },
+        };
+    </script>
+
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-6">
+
+    <div class="relative w-full max-w-md">
+
+        <div class="absolute -top-20 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-20 w-96 h-96 bg-primary/15 rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] flex items-center justify-center pointer-events-none">
+            <span class="material-icons text-[40rem] select-none">cake</span>
+        </div>
+
+        <div class="relative bg-white/80 dark:bg-white/5 ios-blur border border-white/40 dark:border-white/10 rounded-[2rem] p-8 shadow-2xl z-10">
+
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-primary shadow-xl shadow-primary/20 mb-4">
+                    <span class="material-icons text-white text-5xl">cake</span>
+                </div>
+                <h1 class="text-4xl font-display font-bold text-slate-800 dark:text-white">Bagery.</h1>
+                <p class="text-slate-500 dark:text-slate-400 font-medium">Tatlı anılar burada başlar</p>
+            </div>
+
+            <form method="post" class="space-y-4">
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Adınız</label>
+                    <input asp-for="FirstName" required class="w-full rounded-2xl py-3 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Soyadınız</label>
+                    <input asp-for="LastName" required class="w-full rounded-2xl py-3 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">E-posta</label>
+                    <input asp-for="Email" type="email" required class="w-full rounded-2xl py-3 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Kullanıcı Adı</label>
+                    <input asp-for="UserName" required class="w-full rounded-2xl py-3 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Şifre</label>
+                    <input asp-for="Password" type="password" required class="w-full rounded-2xl py-3 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Şifre Tekrar</label>
+                    <input asp-for="ConfirmPassword" type="password" required class="w-full rounded-2xl py-3 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Görsel URL</label>
+                    <input asp-for="ImageUrl" type="text" required class="w-full rounded-2xl py-3 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary" />
+                </div>
+
+                <button type="submit" class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-3 rounded-2xl shadow-lg mt-4">
+                    Kayıt Ol
+                </button>
+
+                <div class="text-danger mb-3">
+                    @Html.ValidationSummary()
+                </div>
+
+            </form>
+
+            <p class="text-center text-sm text-slate-500 dark:text-slate-400 mt-6">
+                Zaten hesabınız var mı?
+                <a href="/Account/Login" class="text-primary font-bold hover:underline">Giriş Yap</a>
+            </p>
+        </div>
+
+    </div>
+
+    <button class="fixed bottom-6 right-6 p-4 bg-white dark:bg-slate-800 rounded-full shadow-xl border border-slate-200 dark:border-slate-700 transition-transform active:scale-95" onclick="document.documentElement.classList.toggle('dark')">
+        <span class="material-icons dark:hidden text-slate-800">dark_mode</span>
+        <span class="material-icons hidden dark:block text-white">light_mode</span>
+    </button>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+﻿@*
+    Ui Sidebar Component
+*@
+
+<style>
+    /* Ana kapsayıcıyı flex yapıp her şeyi dikeyde ortalıyoruz */
+    .header-lower .outer-box {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        height: 100% !important;
+    }
+
+    /* Sağ taraftaki ikon listesini hizalıyoruz */
+    .menu-right-content {
+        display: flex !important;
+        align-items: center !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+        /* İkonların asılı durmasını engellemek için li etiketlerini temizliyoruz */
+        .menu-right-content li {
+            margin: 0 10px !important; /* İkonlar arası boşluk */
+            float: none !important; /* Float bazen dikey hizayı bozar */
+            display: flex !important;
+            align-items: center !important;
+        }
+
+            /* İkon butonlarının içindeki görselleri ve çerçeveleri ortalıyoruz */
+            .menu-right-content li a,
+            .menu-right-content li .search-box-btn {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+                width: 45px !important;
+                height: 45px !important;
+                margin-top: 0 !important; /* Varsa negatif marginleri sıfırlar */
+            }
+
+    /* Sepetteki sayı balonunun konumunu ikonun üzerine sabitliyoruz */
+    .cart-btn a {
+        position: relative !important;
+    }
+
+        .cart-btn a span {
+            position: absolute !important;
+            top: -5px !important;
+            right: -5px !important;
+        }
+</style>
+
+<header class="main-header style-one">
+
+    <div class="header-lower">
+        <div class="outer-box">
+            <div class="logo-box">
+                <figure class="logo">
+                    <a href="/Default/Index">
+                        <img src="/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/logo.png" alt="Logo">
+                    </a>
+                </figure>
+            </div>
+
+            <div class="menu-area">
+                <div class="mobile-nav-toggler">
+                    <i class="icon-bar"></i>
+                    <i class="icon-bar"></i>
+                    <i class="icon-bar"></i>
+                </div>
+                <nav class="main-menu navbar-expand-md navbar-light">
+                    <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                        <ul class="navigation clearfix">
+                            <li><a href="/Default/Index">Ana Sayfa</a></li>
+                            <li><a href="/Shop/Index">Sipariş</a></li>
+                            <li><a href="/Contact/Index">İletişim</a></li>
+                            <li><a href="/Login/Index">Giriş Yap</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <ul class="menu-right-content clearfix">
+                <li class="search-box-outer">
+                    <div class="dropdown">
+                        <button class="search-box-btn" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-1.png');" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon-Search"></i>
+                        </button>
+                        <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
+                            <div class="form-container">
+                                <form method="post" action="#">
+                                    <div class="form-group">
+                                        <input type="search" name="search-field" placeholder="Arama...." required="">
+                                        <button type="submit" class="search-btn"><span class="fas fa-search"></span></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="user-btn">
+                    <a href="/User/Dashboard/Index/" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-1.png');">
+                        <i class="icon-Profile"></i>
+                    </a>
+                </li>
+                <li class="cart-btn">
+                    <a href="/User/Cart/Index" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-1.png');">
+                        <i class="icon-Bag"></i>
+                        <span>@(ViewBag.orderItemsCount != null ? ViewBag.orderItemsCount : "0")</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sticky-header">
+        <div class="outer-box">
+            <div class="logo-box">
+                <figure class="logo">
+                    <a href="/Default/Index">
+                        <img src="/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/small-logo.png" alt="Small Logo">
+                    </a>
+                </figure>
+            </div>
+            <div class="menu-area">
+                <nav class="main-menu clearfix">
+                </nav>
+            </div>
+            <ul class="menu-right-content clearfix">
+                <li class="search-box-outer">
+                    <button class="search-box-btn" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-1.png');"><i class="icon-Search"></i></button>
+                </li>
+                <li class="user-btn">
+                    <a href="/User/Dashboard/Index/" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-1.png');"><i class="icon-Profile"></i></a>
+                </li>
+                <li class="cart-btn">
+                    <a href="/User/Cart/Index" style="background-image: url('/bagery-ice-cream-shop-html5-template-2024-08-22-10-34-58-utc/Bagery Pack/Bagery/assets/images/icons/icon-bg-1.png');">
+                        <i class="icon-Bag"></i>
+                        <span>@(ViewBag.orderItemsCount != null ? ViewBag.orderItemsCount : "0")</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</header>
