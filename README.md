@@ -79,3 +79,49 @@ dotnet run
 ## 🔗 Repo
 
 https://lnkd.in/d_XiHNbD
+
+### Proje Görselleri
+
+<img width="1764" height="1453" alt="localhost_7057_Register_Index" src="https://github.com/user-attachments/assets/7cbd1636-551a-4847-9111-e8393a352d41" />
+
+---
+
+<img width="1918" height="965" alt="Ekran görüntüsü 2026-02-09 182856" src="https://github.com/user-attachments/assets/cae71304-e572-4e5e-8107-25dc91efbf76" />
+
+---
+
+<img width="1654" height="12259" alt="localhost_7057_Default_Index" src="https://github.com/user-attachments/assets/99a5ed84-4033-47bd-aaab-11642ae1813f" />
+
+---
+
+<img width="1654" height="3005" alt="localhost_7057_Shop_Index" src="https://github.com/user-attachments/assets/67a6e16a-e597-4ca5-b143-d75bf1d89697" />
+
+---
+
+<img width="1654" height="1744" alt="localhost_7057_Contact_Index" src="https://github.com/user-attachments/assets/f9ad53e3-6c98-4138-9012-f0d674dfd94c" />
+
+---
+
+<img width="1896" height="962" alt="Ekran görüntüsü 2026-02-09 182110" src="https://github.com/user-attachments/assets/dd009baf-a880-4c4e-9bcd-7ad8cff1dd44" />
+
+---
+
+<img width="1918" height="963" alt="Ekran görüntüsü 2026-02-09 182213" src="https://github.com/user-attachments/assets/516c0cc0-a11f-4c62-b02d-59790a9d6d28" />
+
+---
+
+<img width="1901" height="902" alt="Ekran görüntüsü 2026-02-09 181920" src="https://github.com/user-attachments/assets/959ae19e-fd6b-4cf7-b271-3b4f0499868d" />
+
+---
+
+<img width="1901" height="902" alt="Ekran görüntüsü 2026-02-09 181920" src="https://github.com/user-attachments/assets/e51c33fd-a707-4567-909f-cfc57acf71ff" />
+
+---
+
+<img width="1917" height="902" alt="Ekran görüntüsü 2026-02-09 181944" src="https://github.com/user-attachments/assets/4474528c-f801-4919-b27b-33166f543714" />
+
+<img width="1898" height="906" alt="Ekran görüntüsü 2026-02-09 182006" src="https://github.com/user-attachments/assets/a21f26a2-5a96-4222-8df9-82a87ca2a10f" />
+
+---
+
+<img width="1902" height="903" alt="Ekran görüntüsü 2026-02-09 182024" src="https://github.com/user-attachments/assets/b940d26c-e739-4a8c-90b7-badb46b18324" />
