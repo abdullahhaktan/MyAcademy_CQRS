@@ -114,11 +114,9 @@ https://lnkd.in/d_XiHNbD
 
 ---
 
-<img width="1901" height="902" alt="Ekran görüntüsü 2026-02-09 181920" src="https://github.com/user-attachments/assets/e51c33fd-a707-4567-909f-cfc57acf71ff" />
+<img width="1917" height="902" alt="Ekran görüntüsü 2026-02-09 181944" src="https://github.com/user-attachments/assets/4474528c-f801-4919-b27b-33166f543714" />
 
 ---
-
-<img width="1917" height="902" alt="Ekran görüntüsü 2026-02-09 181944" src="https://github.com/user-attachments/assets/4474528c-f801-4919-b27b-33166f543714" />
 
 <img width="1898" height="906" alt="Ekran görüntüsü 2026-02-09 182006" src="https://github.com/user-attachments/assets/a21f26a2-5a96-4222-8df9-82a87ca2a10f" />
 
